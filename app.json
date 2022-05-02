@@ -1,0 +1,6 @@
+{
+  "name": "newsapp",
+  "displayName": "newsapp",
+  "defaultHost": "https://newsapi.org/v2",
+  "apiKey": "your apiKey"
+}

@@ -6,21 +6,22 @@ import {
         ActivityIndicator,
     } from 'react-native';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../../context/UserContext';
 
 import {styles} from './styles';
 
 export const Preload = () => {
 
     const navigation = useNavigation();
+    const userContext = React.useContext(UserContext);
 
     useEffect(() => {
         checkFirstAccess();
     }, [])
 
     async function checkFirstAccess(){
-        const userName = await AsyncStorage.getItem('user');
+        const userName = await userContext.getUser();
         userName ? navigation.navigate('Home') : navigation.navigate('Welcome'); 
     }
 

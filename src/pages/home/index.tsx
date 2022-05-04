@@ -12,34 +12,29 @@ import {styles} from './styles';
 import { ListComponent } from '../../components/newsList';
 import {api} from '../../services/api';
 import {getTopHeadLines, getEverything} from '../../services/News.service';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {INewsInterface} from '../../core/interfces/INewsInterface';
 import uuid from 'react-native-uuid';
 import {ComponentModal} from '../../components/componentmodal';
+import {UserContext} from '../../context/UserContext';
 
 export const Home = () => {
 
     const [newsList, setnewslist] = useState<INewsInterface[]>([]);
-    const [userName, setUserName] = useState<string>('');
     const [load, setLoad] = useState<boolean>(true);
     const [search, setSearch] = useState<string>('');
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>('');
 
+    const userContext = React.useContext(UserContext);
+
     useEffect(() => {
-      getUser();
       getNews();
     }, [])
 
     const onRefresh = () => {
       setRefreshing(false);
       getNews();
-    }
-
-    const getUser = async () => {
-      const name = await AsyncStorage.getItem('user');
-      setUserName(JSON.parse(name));
     }
 
     const setUuidtoList = (articles: INewsInterface[]) => {
@@ -103,7 +98,7 @@ export const Home = () => {
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.container} >
               <View style={styles.view_header}>
-                <Text style={styles.text_header}>Olá, {userName}</Text> 
+                <Text style={styles.text_header}>Olá, {userContext.name}</Text> 
                 <Text style={styles.text_info}>Pesquise algo de seu interesse..</Text>
                 <View style={styles.viewInput}>
                   <TextInput

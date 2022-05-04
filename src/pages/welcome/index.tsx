@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserContext } from '../../context/UserContext';
 
 export const Welcome = () => {
 
   const [name, setName] = useState<string>('');
   const navigation = useNavigation();
+
+  const userContext = React.useContext(UserContext);
   
   const handleEnter = () => {
     enter();
@@ -22,7 +24,7 @@ export const Welcome = () => {
 
   async function enter () {
     if (name != '' && name !== undefined) {
-      await AsyncStorage.setItem('user', JSON.stringify(name));
+      userContext.enter(name);
       navigation.navigate('Home', {user: name});
       setName('');
     }

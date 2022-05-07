@@ -22,7 +22,7 @@ import { CategoryList } from '../../utils/category/Category';
 export const Home = () => {
 
     const [newsList, setnewslist] = useState<INewsInterface[]>([]);
-    const [load, setLoad] = useState<boolean>(true);
+    const [load, setLoad] = useState<boolean>();
     const [search, setSearch] = useState<string>('');
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -47,14 +47,16 @@ export const Home = () => {
       return newsArticles;
     }
 
-    const getNews = async () => {
+    const getNews = async (categoryName?: string) => {
 
+      setLoad(true)
       try {
-        const listOfNews = await getTopHeadLines();
+
+        const listOfNews = categoryName ? await getTopHeadLines(categoryName) : await getTopHeadLines();
+
         const { articles } = listOfNews.data;
-
         const newsArticles = setUuidtoList(articles);
-
+        
         setnewslist(newsArticles);
       } catch (error) {
         showAlert(true, 'Ops! Algo deu errado, tente novamente mais tarde.')
@@ -123,16 +125,17 @@ export const Home = () => {
                   </TouchableOpacity>
                 </View>
 
-                <CategoryComponent listOfCategories={CategoryList} />
+                <CategoryComponent listOfCategories={CategoryList} search={getNews}/>
                 
               </View>
               
               {load ?
-                <View>
-                  <ActivityIndicator size='large' color='#000'/>
-                </View> 
-              : null }
-              <ListComponent listOfNews={newsList} refreshing={refreshing} onRefresh={onRefresh}/>
+                  <View style={styles.viewIndicator}>
+                      <ActivityIndicator size='large' color='#000'/>
+                  </View>
+              : 
+                  <ListComponent listOfNews={newsList} refreshing={refreshing} onRefresh={onRefresh}/>
+              }
 
               <ComponentModal showModal={modalVisible} message={messageAlert} hideModal={hideModal}/>
           </View>

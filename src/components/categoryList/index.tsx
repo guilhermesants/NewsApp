@@ -9,7 +9,12 @@ import {
 import { Category } from '../../utils/category/Category';
 import {styles} from './styles';
 
-export const CategoryComponent = ({listOfCategories}: Category[]) => {
+interface IProps {
+    listOfCategories: Category[];
+    search: (name?: string) => {}
+}
+
+export const CategoryComponent = ({listOfCategories, search}: IProps) => {
     return (
         <FlatList
             data={listOfCategories}
@@ -18,7 +23,7 @@ export const CategoryComponent = ({listOfCategories}: Category[]) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({item})=> (
                 <TouchableOpacity
-                    onPress={() => {}}
+                    onPress={() => search(item.name)}
                     activeOpacity={0.7}
                     style={styles.button}
                 >

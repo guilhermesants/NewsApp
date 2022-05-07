@@ -60,5 +60,9 @@ export const styles = StyleSheet.create({
     viewInput: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+    },
+    viewIndicator: {
+      flex: 1,
+      justifyContent: 'center'
     }
 });

@@ -15,7 +15,9 @@ import {getTopHeadLines, getEverything} from '../../services/News.service';
 import {INewsInterface} from '../../core/interfces/INewsInterface';
 import uuid from 'react-native-uuid';
 import {ComponentModal} from '../../components/componentmodal';
+import {CategoryComponent} from '../../components/categoryList';
 import {UserContext} from '../../context/UserContext';
+import { CategoryList } from '../../utils/category/Category';
 
 export const Home = () => {
 
@@ -120,8 +122,11 @@ export const Home = () => {
                   
                   </TouchableOpacity>
                 </View>
-              </View>
 
+                <CategoryComponent listOfCategories={CategoryList} />
+                
+              </View>
+              
               {load ?
                 <View>
                   <ActivityIndicator size='large' color='#000'/>

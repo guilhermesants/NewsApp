@@ -5,6 +5,14 @@ Este projeto é um projeto simples e tem como objetivo o estudo do react-native 
 Você pode criar sua apiKey em https://newsapi.org para conseguir fazer as requisições, após criada, só inserir esta chave no arquivo app.json. Após isto, basta realizar os passos abaixo (utilizei o gerenciador de pacotes npm):
   - npm install
   - npx react-native run-android ou run-ios
+ 
+## Dev
+  - Axios: https://axios-http.com/ptbr/docs/intro
+  - AsyncStorage: https://reactnative.dev/docs/asyncstorage
+  - ReactNavigation: https://reactnavigation.org/
+  - Api Context: https://pt-br.reactjs.org/docs/context.html
+  - Share: https://reactnative.dev/docs/share
+  - Linking: https://reactnative.dev/docs/linking
 
 ### Algumas imagens do projeto
 <div flex-direction:"row">

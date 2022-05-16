@@ -9,8 +9,8 @@ import {
     RefreshControl,
     Linking
   } from 'react-native';
-  import { format } from 'date-fns';
 
+  import { Format } from '../../utils/date/FormatDate';
   import { useNavigation } from '@react-navigation/native';
   import {INewsInterface} from '../../core/interfces/INewsInterface';
   import {styles} from './styles';
@@ -27,7 +27,7 @@ import {
     console.log(listOfNews);
 
     const moreInfo = (url: string, urlImage: string, date: string, title: string) => {
-        const dateNews = formatDate(date);
+        const dateNews = Format.formatDate(date);
         navigation.navigate('Detalhes', {url: url, urlImage: urlImage, date: dateNews, title: title})
         //Linking.openURL(url);
     }
@@ -36,10 +36,6 @@ import {
        const result = await Share.share({
            message: url,
        })
-    }
-
-    const formatDate = (date: string) => {
-        return format(new Date(date), 'dd/MM/yy')
     }
 
     return (
@@ -51,7 +47,7 @@ import {
                 <View style={styles.view_image}>
                     <View style={styles.text_area}>
                         <Text style={styles.text}> {item.title ? item.title : item.description}</Text>
-                        <Text style={styles.text}> {formatDate(item.publishedAt)}</Text>
+                        <Text style={styles.text}> {Format.formatDate(item.publishedAt)}</Text>
                     </View>
                     <Image  
                         style={styles.box_image}

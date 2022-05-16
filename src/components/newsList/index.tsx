@@ -26,8 +26,10 @@ import {
     const navigation = useNavigation();
     console.log(listOfNews);
 
-    const moreInfo = (url: string) => {
-        Linking.openURL(url);
+    const moreInfo = (url: string, urlImage: string, date: string, title: string) => {
+        const dateNews = formatDate(date);
+        navigation.navigate('Detalhes', {url: url, urlImage: urlImage, date: dateNews, title: title})
+        //Linking.openURL(url);
     }
 
     const shareWhatsApp = async (url: string) => {
@@ -36,6 +38,9 @@ import {
        })
     }
 
+    const formatDate = (date: string) => {
+        return format(new Date(date), 'dd/MM/yy')
+    }
 
     return (
         <FlatList
@@ -46,16 +51,16 @@ import {
                 <View style={styles.view_image}>
                     <View style={styles.text_area}>
                         <Text style={styles.text}> {item.title ? item.title : item.description}</Text>
-                        <Text style={styles.text}> {format(new Date(item.publishedAt), 'dd/MM/yy')}</Text>
+                        <Text style={styles.text}> {formatDate(item.publishedAt)}</Text>
                     </View>
-                    <Image 
+                    <Image  
                         style={styles.box_image}
                         source={{uri:item.urlToImage}}
                         />
 
                     <View style={styles.viewButtons}>
                         <TouchableOpacity 
-                            onPress={() => moreInfo(item.url)}
+                            onPress={() => moreInfo(item.url, item.urlToImage, item.publishedAt, item.title)}
                             activeOpacity={0.7}
                             style={styles.button}
                         >

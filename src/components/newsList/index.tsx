@@ -13,7 +13,7 @@ import {
   import { Format } from '../../utils/date/FormatDate';
   import { useNavigation } from '@react-navigation/native';
   import {INewsInterface} from '../../core/interfces/INewsInterface';
-  import {styles} from './styles';
+  import { Card } from '../card';
 
   interface IpropsListComponent {
     listOfNews: INewsInterface[];
@@ -27,15 +27,18 @@ import {
     console.log(listOfNews);
 
     const moreInfo = (url: string, urlImage: string, date: string, title: string) => {
-        const dateNews = Format.formatDate(date);
-        navigation.navigate('Detalhes', {url: url, urlImage: urlImage, date: dateNews, title: title})
+        navigation.navigate('Detalhes', {url: url, urlImage: urlImage, date: date, title: title})
         //Linking.openURL(url);
     }
 
-    const shareWhatsApp = async (url: string) => {
+    const share = async (url: string) => {
        const result = await Share.share({
            message: url,
        })
+    }
+
+    const formartTitle = (title: string) => {
+        return title.length > 90 ? title.substring(0, 90) + '...' : title;
     }
 
     return (
@@ -44,40 +47,14 @@ import {
             keyExtractor={item => item.id}
             showsVerticalScrollIndicator={false}
             renderItem={({item}) => (
-                <View style={styles.view_image}>
-                    <View style={styles.text_area}>
-                        <Text style={styles.text}> {item.title ? item.title : item.description}</Text>
-                        <Text style={styles.text}> {Format.formatDate(item.publishedAt)}</Text>
-                    </View>
-                    <Image  
-                        style={styles.box_image}
-                        source={{uri:item.urlToImage}}
-                        />
-
-                    <View style={styles.viewButtons}>
-                        <TouchableOpacity 
-                            onPress={() => moreInfo(item.url, item.urlToImage, item.publishedAt, item.title)}
-                            activeOpacity={0.7}
-                            style={styles.button}
-                        >
-                            <Text style={styles.buttonText}>Saiba mais</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity 
-                            onPress={() => shareWhatsApp(item.url)}
-                            activeOpacity={0.7}
-                            style={styles.button}
-                        >
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.buttonText}>Compartilhar</Text>
-                                <Image 
-                                    style={styles.shareIcon}
-                                    source={require('../../assets/share-icon.png')}
-                                />
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <Card 
+                    url={item.url}
+                    title={item.title ? formartTitle(item.title) : formartTitle(item.description)}
+                    date={Format.formatDate(item.publishedAt)}
+                    image={item.urlToImage}
+                    moreInfo={moreInfo}
+                    share={share}
+                />
             )}
             refreshControl={
                 <RefreshControl

@@ -18,7 +18,7 @@ Você pode criar sua apiKey em https://newsapi.org para conseguir fazer as requi
 <div flex-direction:"row">
   <img src="https://user-images.githubusercontent.com/48955667/166266649-7a0a5eb9-99f4-4229-9c57-73da157b0eff.png" width="200px" />
   <img src="https://user-images.githubusercontent.com/48955667/166267027-d1cacde2-2345-48cd-a07e-d13f1e4f0d2c.png" width="200px" />
-  <img src="https://user-images.githubusercontent.com/48955667/167264353-932fc9ae-9fda-477d-8830-f89363e958fb.png" width="200px" />
+  <img src="https://user-images.githubusercontent.com/48955667/168702384-e4b26e07-6d61-4281-a401-1c389b8a4c5e.png" width="200px" />
   <img src="https://user-images.githubusercontent.com/48955667/168616352-a46ad5f5-e1ba-41e1-bc6b-d7332021f5a0.png" width="200px" />
   <img src="https://user-images.githubusercontent.com/48955667/166267249-744e20a4-ed36-427e-b575-ce5808335f91.gif" width="200px" />
 </div>

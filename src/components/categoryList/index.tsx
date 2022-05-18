@@ -27,7 +27,7 @@ export const CategoryComponent = ({listOfCategories, search}: IProps) => {
                     activeOpacity={0.7}
                     style={styles.button}
                 >
-                    <Text style={styles.text}>{item.translatedName}</Text>
+                    <Text style={item.selected ? styles.colorEnable : styles.colorDisable}>{item.translatedName}</Text>
                 </TouchableOpacity>
             )}
         />

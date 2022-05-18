@@ -27,6 +27,7 @@ export const Home = () => {
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>('');
+    const [categoryList, setCategoryList] = useState(CategoryList);
 
     const userContext = React.useContext(UserContext);
 
@@ -47,9 +48,33 @@ export const Home = () => {
       return newsArticles;
     }
 
+    const resetCategoryList = () => {
+      const list = categoryList.map((item) => {
+        return {...item, selected: false}
+      })
+      return list;
+    }
+
+    const checkSelectedCategory = (categoryName?: string) => {
+      if (categoryName) {        
+        let category = categoryList.map((item) => {
+          if (item.name === categoryName) {
+            return {...item, selected: true}
+          }
+          return {...item, selected: false};
+        });
+
+        setCategoryList(category)
+      } else {
+        setCategoryList(resetCategoryList())
+      }
+    }
+
     const getNews = async (categoryName?: string) => {
 
       setLoad(true)
+      checkSelectedCategory(categoryName);
+
       try {
 
         const listOfNews = categoryName ? await getTopHeadLines(categoryName) : await getTopHeadLines();
@@ -125,7 +150,7 @@ export const Home = () => {
                   </TouchableOpacity>
                 </View>
 
-                <CategoryComponent listOfCategories={CategoryList} search={getNews}/>
+                <CategoryComponent listOfCategories={categoryList} search={getNews}/>
                 
               </View>
               

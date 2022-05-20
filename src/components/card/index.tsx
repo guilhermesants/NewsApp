@@ -7,6 +7,7 @@ import {
   } from 'react-native';
 
   import {styles} from './styles';
+  import Icon from 'react-native-vector-icons/FontAwesome'
 
   interface IPropsCard {
       url: string;
@@ -39,10 +40,7 @@ import {
                     onPress={() => share(url)}
                     activeOpacity={0.7}
                 >
-                <Image 
-                        style={styles.cardIconShare}
-                        source={require('../../assets/share.png')}
-                    />
+                    <Icon name="share-alt" size={28} color="#000" />
                 </TouchableOpacity>
             </View>
         </View>

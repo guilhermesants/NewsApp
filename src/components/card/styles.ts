@@ -29,10 +29,6 @@ export const styles = StyleSheet.create({
         marginHorizontal: 10,
         textAlign: 'right'
     },
-    cardIconShare: {
-        width: 24,
-        height: 24
-    },
     cardButtons: {
         width: '100%',
         alignItems: 'flex-end',

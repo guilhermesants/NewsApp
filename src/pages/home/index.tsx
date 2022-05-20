@@ -4,9 +4,7 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  TextInput,
-  ActivityIndicator,
-  Image
+  ActivityIndicator
 } from 'react-native';
 import {styles} from './styles';
 import { ListComponent } from '../../components/newsList';
@@ -18,12 +16,12 @@ import {ComponentModal} from '../../components/componentmodal';
 import {CategoryComponent} from '../../components/categoryList';
 import {UserContext} from '../../context/UserContext';
 import { CategoryList } from '../../utils/category/Category';
+import { SearchField } from '../../components/searchField';
 
 export const Home = () => {
 
     const [newsList, setnewslist] = useState<INewsInterface[]>([]);
     const [load, setLoad] = useState<boolean>();
-    const [search, setSearch] = useState<string>('');
     const [refreshing, setRefreshing] = useState<boolean>(false);
     const [modalVisible, setModalVisible] = useState<boolean>(false);
     const [messageAlert, setMessageAlert] = useState<string>('');
@@ -90,9 +88,8 @@ export const Home = () => {
       } 
     }
 
-    const handleSearch = async () => {
-      if (search === '') return;
-       
+    const handleSearch = async (search: string) => {
+
       setLoad(true);
 
       try {
@@ -109,7 +106,6 @@ export const Home = () => {
       } catch (error) {
         showAlert(true, 'Ops! Algo deu errado, tente novamente mais tarde.')
       } finally {
-        setSearch('');
         setLoad(false);
       }
     }
@@ -129,25 +125,9 @@ export const Home = () => {
               <View style={styles.view_header}>
                 <Text style={styles.text_header}>Olá, {userContext.name}</Text> 
                 <Text style={styles.text_info}>Pesquise algo de seu interesse..</Text>
+
                 <View style={styles.viewInput}>
-                  <TextInput
-                    onChangeText={setSearch}
-                    value={search}
-                    placeholder="Pesquisar ..."
-                    placeholderTextColor="#000"
-                    style={styles.input}
-                  />
-                    
-                  <TouchableOpacity
-                    onPress={handleSearch}
-                    activeOpacity={0.7}
-                    style={styles.buttonSearch}
-                  >
-                    <Image
-                      style={styles.searchImage} 
-                      source={require('../../assets/baseline_search_black_24dp.png')}/>
-                  
-                  </TouchableOpacity>
+                  <SearchField handleSearch={handleSearch} />
                 </View>
 
                 <CategoryComponent listOfCategories={categoryList} search={getNews}/>

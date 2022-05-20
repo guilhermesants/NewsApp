@@ -30,36 +30,12 @@ export const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: 5,
         padding: 5,
-        //borderBottomLeftRadius: 10,
-        //borderBottomRightRadius: 10,
         elevation: 15
-    }, 
-    input: {
-        backgroundColor: '#eba417',
-        color: '#000',
-        fontSize: 18,
-        padding: 6,
-        borderRadius: 7,
-        margin: 0,
-        marginVertical: 3,
-        elevation: 15,
-        width: '85%'
-      },
-    buttonSearch: {
-      backgroundColor: '#eba417',
-      borderRadius: 7,
-      elevation: 15,
-      marginVertical: 3,
-      padding:18
-    },
-    searchImage: {
-      width: 15,
-      height: 15,
-      backgroundColor: 'transparent'
     },
     viewInput: {
         flexDirection: 'row',
         justifyContent: 'space-around',
+        marginVertical: 2,
     },
     viewIndicator: {
       flex: 1,

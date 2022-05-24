@@ -14,6 +14,8 @@ export const styles = StyleSheet.create({
     cardImage: {
         height: 270,
         width: '100%',
+    },
+    cardImageStyle: {
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
@@ -31,9 +33,34 @@ export const styles = StyleSheet.create({
     },
     cardButtons: {
         width: '100%',
-        alignItems: 'flex-end',
+        alignItems: 'center',
         paddingHorizontal: 10,
         height: '10%',
-        justifyContent: 'flex-end'
+        justifyContent: 'flex-end',
+        flexDirection: 'row'
+    },
+    cartButtonMoreInfo: {
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 10,
+        justifyContent: 'space-evenly',
+        width: 100,
+        height: 30,
+        borderWidth: 0.3,
+        borderColor: '#000'
+    },
+    cardButtonShare: {
+        marginLeft: 10,
+        marginTop: 10,
+        borderRadius: 40,
+        width: 32,
+        height: 32,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cardTextMoreInfo: {
+        color: '#000',
+        fontWeight: 'bold',
     }
 })
